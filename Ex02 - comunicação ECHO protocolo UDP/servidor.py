@@ -12,19 +12,12 @@ PORT = 6000
 TAMANHO_BUFFER = 64000 
 
 # Criação do socket do servidor
-try:
-    socket_servidor = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    print("Socket UDP criado com sucesso!")
-except socket.error as err:
-    print(f"Falha ao criar socket: {err}")
-    exit()
-    
-# Vinculando o endereço de escuta ao socket do servidor
-try:    
-    socket_servidor.bind((HOST, PORT))
-    print(f"Servidor UDP escutando em {HOST}:{PORT}")
-except socket.error as err:
-    print(f"Falha ao vincular: {err}")
+socket_servidor = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+print("Socket UDP criado com sucesso!")
+
+# Vinculando o endereço ao socket do servidor
+socket_servidor.bind((HOST, PORT))
+print(f"Servidor UDP vinculado a {HOST}:{PORT}")
 
 while True:
     try:

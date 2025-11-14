@@ -12,13 +12,9 @@ PORT_SERVIDOR = 6000
 TAMANHO_BUFFER = 64000 
 
 # Criação do socket do cliente
-try:
-    socket_cliente = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    socket_cliente.settimeout(10) # Limite de tempo de resposta do servidor
-    print("Socket UDP criado com sucesso!")
-except socket.error as err:
-    print(f"Falha ao criar o socket: {err}")
-    exit()
+socket_cliente = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+socket_cliente.settimeout(10) # Limite de tempo de resposta do servidor
+print("Socket UDP criado com sucesso!")
 
 try:
     while True:
@@ -47,5 +43,5 @@ except socket.timeout:
 
 # Tratamento de outros erros - o UDP não tem um tratamento específico para perdas de pacote
 except socket.error as err:
-    print("Ocorreu um erro de socket: {err}")
+    print(f"Ocorreu um erro de socket: {err}")
     socket_cliente.close()
