@@ -11,6 +11,7 @@ PORT_SERVIDOR = 7000
 
 # Criando socket TCP do cliente
 socket_cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+socket_cliente.settimeout(10)
 print("Socket TCP criado com sucesso!")
 
 # Criando a conexão com o servidor

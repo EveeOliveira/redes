@@ -44,8 +44,4 @@ except socket.timeout:
 # Tratamento de outros erros - o UDP não tem um tratamento específico para perdas de pacote
 except socket.error as err:
     print(f"Ocorreu um erro de socket: {err}")
-<<<<<<< HEAD
     socket_cliente.close()
-=======
-    socket_cliente.close()
->>>>>>> b9419fa87719a0ab109a95e8111804e486084491

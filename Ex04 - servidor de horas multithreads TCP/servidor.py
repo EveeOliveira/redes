@@ -6,10 +6,17 @@ EXERCÍCIO 04 - Servidor de horas com protocolo TCP
 
 import socket
 from datetime import datetime
+import threading
 
+# Função que retorna a hora atual já codificada
 def horaAtual():
-    return datetime.now().strftime("%H:%M:%S")
+    return datetime.now().strftime("%H:%M:%S").encode('utf-8')
 
+# Fução para cuidar de cada cliente
+def handleCliente(socket_cliente):
+    print('Conexão aceita!')
+    socket_cliente.send(horaAtual())
+    
 # Dados do endereço do servidor
 HOST = "localhost"
 PORT = 7000
@@ -28,5 +35,10 @@ print('Esperando conexões ...')
 while True:
     # Aceitando conexões
     socket_cliente, endereco = socket_servidor.accept()
-    horas = horaAtual().encode('utf-8')
-    socket_cliente.send(horas)
+    
+    # Abrindo uma nova thread para cada cliente aceito
+    thread_cliente = threading.Thread(
+        target=handleCliente,
+        args=(socket_cliente,)
+    )
+    thread_cliente.start()
