@@ -11,7 +11,6 @@ PORT_SERVIDOR = 7000
 
 # Criando socket TCP do cliente
 socket_cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-socket_cliente.settimeout(10)
 print("Socket TCP criado com sucesso!")
 
 # Criando a conexão com o servidor
@@ -19,4 +18,4 @@ socket_cliente.connect((HOST_SERVIDOR, PORT_SERVIDOR))
 
 # Recebendo horas
 horas = socket_cliente.recv(1024)
-print(f"Servidor do Servidor: {horas.decode('utf-8')}")
+print(f"Mensagem do Servidor: {horas.decode('utf-8')}")

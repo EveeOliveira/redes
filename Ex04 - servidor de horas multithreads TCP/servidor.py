@@ -13,9 +13,16 @@ def horaAtual():
     return datetime.now().strftime("%H:%M:%S").encode('utf-8')
 
 # Fução para cuidar de cada cliente
-def handleCliente(socket_cliente):
-    print('Conexão aceita!')
-    socket_cliente.send(horaAtual())
+def handleCliente(socket_cliente, endereco):
+    print(f"Solicitação recebida do cliente : {endereco}!")
+    # Tratamento de erro por cliente
+    try:
+        socket_cliente.send(horaAtual())
+    except Exception as e:
+        print(f"ERRO: Erro ao comunicar com o cliente {endereco}")
+    finally:
+        print("Solicitação atendida!")
+        socket_cliente.close()
     
 # Dados do endereço do servidor
 HOST = "localhost"
@@ -30,7 +37,7 @@ socket_servidor.bind((HOST, PORT))
 
 # Criando canal de escuta do servidor
 socket_servidor.listen(8) # Número de conexões pendentes = 8
-print('Esperando conexões ...')
+print("Esperando conexões ...")
 
 while True:
     # Aceitando conexões
@@ -39,6 +46,6 @@ while True:
     # Abrindo uma nova thread para cada cliente aceito
     thread_cliente = threading.Thread(
         target=handleCliente,
-        args=(socket_cliente,)
+        args=(socket_cliente, endereco)
     )
     thread_cliente.start()
