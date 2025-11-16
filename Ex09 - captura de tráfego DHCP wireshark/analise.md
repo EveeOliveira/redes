@@ -1,5 +1,5 @@
 >DISCENTES: Evelen Pinheiro de Oliveira e Marcos Eduardo da Silva Braga
->EXERCÍCIO 08 - Captura de tráfego ICMP pelo Wireshark
+>EXERCÍCIO 09 - Captura de tráfego DHCP pelo Wireshark
 
 ###### Os dados foram mascarados para proteção
 
