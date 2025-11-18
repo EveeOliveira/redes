@@ -5,7 +5,7 @@ import websockets
 async def enviar(websocket):
     while True:
         # Lê a mensagem digitada pelo usuário no terminal
-        msg = input("")
+        msg = await asyncio.to_thread(input, "")
         # Envia a mensagem ao servidor
         await websocket.send(msg)
 
